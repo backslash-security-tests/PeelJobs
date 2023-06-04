@@ -13,6 +13,8 @@ import boto
 import requests
 import os
 
+from django.db.models.expressions import RawSQL
+
 from django.template import loader
 from django.shortcuts import render
 from django.http.response import HttpResponseRedirect
@@ -234,6 +236,9 @@ def facebook_login(request):
 
 
 def google_login(request):
+    
+    RawSQL("select col from sometable where othercol = '%s'")
+    
     if 'code' in request.GET:
         params = {
             'grant_type': 'authorization_code',
